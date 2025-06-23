@@ -1,6 +1,6 @@
-from django. shortcuts import render, redirect
-from .forms import RegistrationForm
-from .models import Account
+from django. shortcuts import render, redirect, get_object_or_404
+from .forms import RegistrationForm, UserForm, UserProfileForm
+from .models import Account, UserProfile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
@@ -40,7 +40,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            return redirect('account/login/?command=verification&email='+email)
+            return redirect('accounts/login/?command=verification&email='+email)
     else:
         form = RegistrationForm()      
     context = {
@@ -56,7 +56,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
-            return redirect('index')
+            return redirect('edit_profile')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -124,7 +124,7 @@ def forgotPassword(request):
             # Reset password email
             current_site = get_current_site(request)
             mail_subject = 'Reset Your Password'
-            message = render_to_string('accounts/reset_password_email.html', {
+            message = render_to_string('accounts/password/reset_password_email.html', {
                 'user': user,
                 'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -139,8 +139,7 @@ def forgotPassword(request):
         else:
             messages.error(request, 'Account does not exist!')
             return redirect('forgotPassword')
-    return render(request, 'accounts/forgot-password.html')
-
+    return render(request, 'accounts/password/forgot-password.html')
 
 def resetpassword_validate(request, uidb64, token):
     try:
@@ -174,5 +173,4 @@ def resetPassword(request):
             messages.error(request, 'Password do not match!')
             return redirect('resetPassword')
     else:
-        return render(request, 'accounts/reset-Password.html')
-
+        return render(request, 'accounts/password/reset-Password.html')
