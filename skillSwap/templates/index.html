@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <a id="top"></a>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillSwipe - Where skills Meet & Teams Form</title>
+  <meta name="description" content="Smart matching connects you with complementary teammates for hackathons and college projects">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  <style>
+    .fade-in {
+      animation: fadeInUp 1s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hover-scale {
+      transition: transform 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+    .gradient-text {
+      background: linear-gradient(to right, #e26eb6, #d971ee);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-purple-100 via-pink-200 to-[#f4c2c2]-300">
+
+   
+  <header class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-md z-50 px-6 py-4 shadow">
+  <nav class="flex items-center justify-between max-w-7xl mx-auto">
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-gradient-to-r from-purple-300 to-blue-300 rounded-xl flex items-center justify-center">
+<i data-lucide="users" class="h-6 w-6 text-pink-300"></i>
+        </div>
+<a href="#top" class="text-2xl font-bold gradient-text">SkillSwipe</a>
+      </div>
+      <div class="hidden md:flex items-center space-x-8">
+  <a href="#features" class="text-[#c08497] hover:text-[#e0bbf9] transition-colors">Features</a>
+  <a href="#how-it-works" class="text-[#c08497] hover:text-[#f8bbd0] transition-colors">How it Works</a>
+  <a href="#testimonials" class="text-[#c08497] hover:text-[#fce4ec] transition-colors">Reviews</a>
+
+<a href="{% url 'login' %}">
+    Get Started
+</a>
+   
+</div>
+
+    </nav>
+  </header>
+
+  <section class="relative px-6 py-20 text-center">
+    <div class="max-w-5xl mx-auto fade-in">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+       <span class="gradient-text">Where Skills Meet &</span><br>Teams Form
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+        Stop awkward asking around. Our smart matching connects you with complementary teammates for hackathons and college projects based on skills, personality, and project goals.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+       <button class="bg-gradient-to-r from-[#f8bbd0] via-[#e0bbf9] to-[#fce4ec] text-black px-8 py-4 rounded-xl text-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center space-x-2">
+    <span>Start Building Teams</span>
+    <i data-lucide="arrow-right" class="h-5 w-5"></i>
+  </button>
+        <button class="flex items-center space-x-2 text-gray-700 hover:text-purple-600 transition-colors">
+          <div class="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:shadow-xl transition-shadow">
+            <i data-lucide="play" class="h-6 w-6 ml-1"></i>
+          </div>
+          <span class="font-medium">Watch Demo</span>
+        </button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-purple-400 mb-2">10K+</div>
+          <div class="text-gray-600">Students Connected</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-blue-300 mb-2">95%</div>
+          <div class="text-gray-600">Match Success Rate</div>
+        </div>
+        <div class="bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg">
+          <div class="text-3xl font-bold text-pink-400 mb-2">2.5K</div>
+          <div class="text-gray-600">Teams Formed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="px-6 py-20 bg-pink-200">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">Why SkillSwap Works</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">We've reimagined team formation with smart algorithms and intuitive design.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="group p-8 rounded-2xl bg-gradient-to-br from-pink-50 to-purple-100 hover:shadow-xl transition-all duration-300 hover-scale">
+          <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="zap" class="h-8 w-8 text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Smart Matching</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Our algorithm suggests exactly who you need. No more random connections.
+          </p>
+        </div>
+
+        <div class="group p-8 rounded-2xl bg-gradient-to-br from-purple-50 to-blue-100 hover:shadow-xl transition-all duration-300 hover-scale">
+          <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-400 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="target" class="h-8 w-8 text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Goal-Oriented</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Tell us your project type and team size. We'll suggest the perfect mix of skills and personalities.
+          </p>
+        </div>
+
+        <div class="group p-8 rounded-2xl bg-gradient-to-br from-pink-50 to-[#f4c2c2]-100 hover:shadow-xl transition-all duration-300 hover-scale">
+          <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-[#f4c2c2]-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <i data-lucide="message-circle" class="h-8 w-8 text-white"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4 text-gray-900">Seamless Communication</h3>
+          <p class="text-gray-600 leading-relaxed">
+            Start group chats instantly or connect via contact details. No awkward DMs or cold outreach.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how-it-works" class="px-6 py-20 bg-gradient-to-br from-[#f4c2c2]-100 to-blue-500">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-900">How It Works</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">From profile to perfect team in three simple steps</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 text-center">
+        <div class="group">
+          <div class="w-24 h-24 bg-gradient-to-r from-blue-400 to-pink-400 rounded-3xl mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold group-hover:scale-110 transition-transform">1</div>
+          <h3 class="text-2xl font-bold mb-4">Create Your Profile</h3>
+          <p class="text-gray-600">Add your skills, past projects, and preferences for teammates.</p>
+        </div>
+        <div class="group">
+          <div class="w-24 h-24 bg-gradient-to-r from-pink-400 to-purple-400 rounded-3xl mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold group-hover:scale-110 transition-transform">2</div>
+          <h3 class="text-2xl font-bold mb-4">Smart Matching</h3>
+          <p class="text-gray-600">Swipe and match with profiles that complement your skills.</p>
+        </div>
+        <div class="group">
+          <div class="w-24 h-24 bg-gradient-to-r from-purple-400 to-pink-400 rounded-3xl mx-auto mb-6 flex items-center justify-center text-white text-3xl font-bold group-hover:scale-110 transition-transform">3</div>
+          <h3 class="text-2xl font-bold mb-4">Build Your Team</h3>
+          <p class="text-gray-600">Chat and collaborate once you’ve matched. Your dream team awaits!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-gray-900 text-white px-6 py-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div class="w-10 h-10 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl flex items-center justify-center">
+              <i data-lucide="users" class="h-6 w-6 text-white"></i>
+            </div>
+            <span class="text-2xl font-bold">SkillSwipe</span>
+          </div>
+          <p class="text-gray-400">The smart way to build perfect teams for hackathons and college projects.</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Product</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#">Features</a></li>
+            <li><a href="#">How it Works</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Support</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+        <p>&copy; 2024 SkillSwap. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    lucide.createIcons();
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('section').forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
