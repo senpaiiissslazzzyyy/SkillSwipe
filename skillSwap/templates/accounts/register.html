@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillSwipe - Register</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-pink-200 text-gray-800 font-sans">
+  <div class="relative min-h-screen bg-gradient-to-br from-purple-100 via-pink-200 to-[#f4c2c2] flex items-center justify-center px-4">
+    <div class="relative z-10 max-w-md w-full bg-white bg-opacity-50 rounded-lg p-8 shadow-lg">
+      {% include 'alerts.html' %}
+      <h1 class="text-2xl font-bold text-center mb-2">Create New Account</h1>
+      <p class="text-center text-sm mb-6">Already Have Account ? <a href="{% url 'login' %}" class="text-orange-600 font-semibold hover:underline">Login</a></p>
+
+      <form action="{% url 'register' %}" class="space-y-4" method="POST">
+        {% csrf_token %}
+        <div>
+            <div>
+          <label class="block text-sm font-medium m-1">Full Name</label>
+          {{ form.full_name }}
+        </div>
+          <label class="block text-sm font-medium m-1">Email</label>
+          {{form.email }}
+        <div>
+          <label class="block text-sm font-medium m-1">Contact Number</label>
+          {{form.phone_number }}
+        </div>
+        <div>
+          <label class="block text-sm font-medium m-1">Date of Birth</label>
+          {{form.date_of_birth }}
+        </div>
+        <div>
+          <label class="block text-sm font-medium m-1">Password</label>
+          {{ form.password }}
+        </div>
+        <div>
+          <label class="block text-sm font-medium m-1">Confirm Password</label>
+          {{ form.confirm_password }}
+        </div>
+        <button type="submit" class="w-full bg-pink-400 text-white font-semibold py-2 rounded-md hover:bg-pink-600 transition mt-3">Register</button>
+        {{ form.errors }}
+        {{ form.non_field_errors }}
+      </form>
+    </div>
+
+
+</body>
+</html>
