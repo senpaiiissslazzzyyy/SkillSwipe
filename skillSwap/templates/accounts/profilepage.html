@@ -30,11 +30,12 @@
       <button onclick="toggleEdit()" class="bg-pink-500 text-white px-4 py-1 rounded-md hover:bg-pink-600 transition mb-6" id="editBtn">✏️ Edit Profile</button>
     </div>
 
-    <form id="profileForm" class="space-y-4 hidden">
+    <form id="profileForm" action="{% url 'edit_profile' %}" class="space-y-4 hidden" method="POST">
+      {% csrf_token %}
       <div>
         <label for="nameInput" class="block text-sm font-medium text-gray-700">Name</label>
-        <input type="text" id="nameInput" placeholder="Enter your name" class="w-full border rounded-md px-4 py-2" />
-      </div>
+        {{ user_form.full_name }}
+        </div>
 
       <div>
         <label for="facultyInput" class="block text-sm font-medium text-gray-700">Faculty / Stream</label>
@@ -43,12 +44,12 @@
 
       <div>
         <label for="skillsInput" class="block text-sm font-medium text-gray-700">Skills</label>
-        <input type="text" id="skillsInput" placeholder="HTML, CSS, Django, Figma..." class="w-full border rounded-md px-4 py-2" />
+        {{ user_form.skill }}
       </div>
 
       <div>
         <label for="contactInput" class="block text-sm font-medium text-gray-700">Contact (Email or Phone)</label>
-        <input type="text" id="contactInput" placeholder="neelam@example.com / 98XXXXXXXX" class="w-full border rounded-md px-4 py-2" />
+        {{ user_form.email }}
       </div>
 
       <div>
