@@ -1,6 +1,6 @@
-from django. shortcuts import render, redirect
-from .forms import RegistrationForm
-from .models import Account
+from django. shortcuts import render, redirect, get_object_or_404
+from .forms import RegistrationForm, UserForm, UserProfileForm
+from .models import Account, UserProfile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 
@@ -40,7 +40,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            return redirect('/login/?command=verification&email='+email)
+            return redirect('accounts/login/?command=verification&email='+email)
     else:
         form = RegistrationForm()      
     context = {
@@ -56,7 +56,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
-            return redirect('index')
+            return redirect('edit_profile')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -67,6 +67,35 @@ def logout(request):
     auth.logout(request)
     messages.success(request, 'You are logged out.')
     return redirect('login')
+
+
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        current_password = request.POST['current_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+
+        user = Account.objects.get(username__exact=request.user.username)
+
+        if new_password == confirm_password:
+            success = user.check_password(current_password)
+            if success:
+                user.set_password(new_password)
+                user.save()
+                # auth.logout(request)
+                messages.success(request, 'Password updated successfully.')
+                return redirect('change_password')
+            else:
+                messages.error(request, 'Please enter valid current password')
+                return redirect('change_password')
+        else:
+            messages.error(request, 'Password does not match!')
+            return redirect('change_password')
+    return render(request, 'accounts/change_password.html')
+
+
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -82,6 +111,9 @@ def activate(request, uidb64, token):
     else:
         messages.error(request, 'Invalid activation link')
         return redirect('register')
+
+
+
 
 def forgotPassword(request):
     if request.method == 'POST':
@@ -124,6 +156,7 @@ def resetpassword_validate(request, uidb64, token):
         messages.error(request, 'This link has been expired!')
         return redirect('login')
 
+
 def resetPassword(request):
     if request.method == 'POST':
         password = request.POST['password']
@@ -140,29 +173,4 @@ def resetPassword(request):
             messages.error(request, 'Password do not match!')
             return redirect('resetPassword')
     else:
-        return render(request, 'accounts/password/reset-password.html')
-
-@login_required(login_url='login')
-def changePassword(request):
-    if request.method == 'POST':
-        current_password = request.POST['current_password']
-        new_password = request.POST['new_password']
-        confirm_password = request.POST['confirm_password']
-
-        user = Account.objects.get(username__exact=request.user.username)
-
-        if new_password == confirm_password:
-            success = user.check_password(current_password)
-            if success:
-                user.set_password(new_password)
-                user.save()
-                # auth.logout(request)
-                messages.success(request, 'Password updated successfully.')
-                return redirect('change_password')
-            else:
-                messages.error(request, 'Please enter valid current password')
-                return redirect('change-password')
-        else:
-            messages.error(request, 'Password does not match!')
-            return redirect('change-password')
-    return render(request, 'accounts/password/change-password.html')
+        return render(request, 'accounts/password/reset-Password.html')
