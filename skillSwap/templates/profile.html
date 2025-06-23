@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Profile – SkillSwipe</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-100 to-purple-100 min-h-screen font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="text-2xl font-bold text-pink-600">SkillSwipe</div>
+    <div class="space-x-6 text-sm font-medium text-gray-700">
+      <a href="#">Feed</a>
+      <a href="#">Team</a>
+      <a href="#">Matches</a>
+      <a href="#">Chat</a>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="max-w-3xl mx-auto px-6 py-12 bg-white shadow-xl rounded-xl mt-10">
+    <div class="flex flex-col items-center text-center">
+      <img id="profilePic" src="https://i.pravatar.cc/150?img=5" class="w-32 h-32 rounded-full border-4 border-pink-400 shadow mb-4" alt="Profile" />
+
+      <input type="file" class="hidden" id="uploadPic" accept="image/*" onchange="previewImage(event)" />
+      <button onclick="document.getElementById('uploadPic').click()" class="text-sm text-pink-600 hover:underline mb-2">Change Photo</button>
+
+      <h2 class="text-2xl font-bold text-pink-700 mb-1" id="displayName">Neelam Rizal</h2>
+      <p class="text-gray-600 text-sm mb-4" id="displayFaculty">BCA – 6th Semester</p>
+
+      <button onclick="toggleEdit()" class="bg-pink-500 text-white px-4 py-1 rounded-md hover:bg-pink-600 transition mb-6" id="editBtn">✏️ Edit Profile</button>
+    </div>
+
+    <!-- Edit Profile Form -->
+    <form id="profileForm" class="space-y-4 hidden">
+      <div>
+        <label for="nameInput" class="block text-sm font-medium text-gray-700">Name</label>
+        <input type="text" id="nameInput" placeholder="Enter your name" class="w-full border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label for="facultyInput" class="block text-sm font-medium text-gray-700">Faculty / Stream</label>
+        <input type="text" id="facultyInput" placeholder="E.g. BCA, CSIT, Engineering..." class="w-full border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label for="skillsInput" class="block text-sm font-medium text-gray-700">Skills</label>
+        <input type="text" id="skillsInput" placeholder="HTML, CSS, Django, Figma..." class="w-full border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label for="contactInput" class="block text-sm font-medium text-gray-700">Contact (Email or Phone)</label>
+        <input type="text" id="contactInput" placeholder="neelam@example.com / 98XXXXXXXX" class="w-full border rounded-md px-4 py-2" />
+      </div>
+
+      <div>
+        <label for="bioInput" class="block text-sm font-medium text-gray-700">Short Bio</label>
+        <textarea id="bioInput" placeholder="Tell us about yourself..." class="w-full border rounded-md px-4 py-2"></textarea>
+      </div>
+
+      <div>
+        <label for="requiredInput" class="block text-sm font-medium text-gray-700">Required Teammates</label>
+        <textarea id="requiredInput" placeholder="Who do you wanna work with?" class="w-full border rounded-md px-4 py-2"></textarea>
+      </div>
+
+      <button type="button" onclick="saveProfile()" class="bg-green-500 text-white font-medium px-4 py-2 rounded-md hover:bg-green-600">💾 Save</button>
+    </form>
+
+    <!-- Display Info -->
+    <div id="displayInfo" class="mt-6 space-y-2">
+      <p><strong class="text-purple-700">Bio:</strong> <span id="bioText">Tech enthusiast who loves UI and coffee ☕</span></p>
+      <p><strong class="text-purple-700">Skills:</strong> <span id="skillsText">HTML, CSS, Figma</span></p>
+      <p><strong class="text-purple-700">Contact:</strong> <span id="contactText">neelam@example.com</span></p>
+      <p><strong class="text-purple-700">Required:</strong> <span id="requiredText">Backend supporter</span></p>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    function toggleEdit() {
+      const form = document.getElementById('profileForm');
+      const info = document.getElementById('displayInfo');
+      const btn = document.getElementById('editBtn');
+
+      if (form.classList.contains('hidden')) {
+        document.getElementById('nameInput').value = document.getElementById('displayName').innerText;
+        document.getElementById('facultyInput').value = document.getElementById('displayFaculty').innerText;
+        document.getElementById('skillsInput').value = document.getElementById('skillsText').innerText;
+        document.getElementById('contactInput').value = document.getElementById('contactText').innerText;
+        document.getElementById('bioInput').value = document.getElementById('bioText').innerText;
+        document.getElementById('requiredInput').value = document.getElementById('requiredText').innerText;
+
+        form.classList.remove('hidden');
+        info.classList.add('hidden');
+        btn.innerText = "❌ Cancel";
+      } else {
+        form.classList.add('hidden');
+        info.classList.remove('hidden');
+        btn.innerText = "✏️ Edit Profile";
+      }
+    }
+
+    function saveProfile() {
+      document.getElementById('displayName').innerText = document.getElementById('nameInput').value;
+      document.getElementById('displayFaculty').innerText = document.getElementById('facultyInput').value;
+      document.getElementById('skillsText').innerText = document.getElementById('skillsInput').value;
+      document.getElementById('contactText').innerText = document.getElementById('contactInput').value;
+      document.getElementById('bioText').innerText = document.getElementById('bioInput').value;
+      document.getElementById('requiredText').innerText = document.getElementById('requiredInput').value;
+
+      toggleEdit();
+    }
+
+    function previewImage(event) {
+      const reader = new FileReader();
+      reader.onload = function () {
+        document.getElementById('profilePic').src = reader.result;
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+</body>
+</html>
