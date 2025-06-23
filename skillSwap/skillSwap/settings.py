@@ -68,6 +68,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'skillSwap.wsgi.application'
+AUTH_USER_MODEL = 'accounts.Account'
 
 
 
