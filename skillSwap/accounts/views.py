@@ -40,7 +40,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
-            return redirect('account/login/?command=verification&email='+email)
+            return redirect('accounts/login/?command=verification&email='+email)
     else:
         form = RegistrationForm()      
     context = {
@@ -175,4 +175,7 @@ def resetPassword(request):
             return redirect('resetPassword')
     else:
         return render(request, 'accounts/reset-Password.html')
+    
+    def view_profile(request):
+        return render(request, 'accounts/profile')
 
