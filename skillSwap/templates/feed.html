@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile – SkillSwipe</title>
+  <title>SkillSwipe – Feed</title>
   <style>
     /* General */
 body {
@@ -60,9 +59,29 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   padding: 32px;
   gap: 40px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s;
+  position: relative;
 }
 
-/* Left */
+/* Swipe Animations */
+.profile-card.swipe-left {
+  animation: swipeLeft 0.5s forwards;
+}
+.profile-card.swipe-right {
+  animation: swipeRight 0.5s forwards;
+}
+
+@keyframes swipeLeft {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(-100%) rotate(-10deg); opacity: 0; }
+}
+
+@keyframes swipeRight {
+  0% { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(100%) rotate(10deg); opacity: 0; }
+}
+
+/* Left Side */
 .profile-left {
   flex: 1;
   text-align: center;
@@ -123,7 +142,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Right */
+/* Right Side */
 .profile-right {
   flex: 2;
   font-size: 15px;
@@ -150,45 +169,141 @@ body {
   </style>
 </head>
 <body>
-{% include 'layouts/navbar.html' %}
+
+  <nav class="navbar">
+    <div class="logo">SkillSwipe</div>
+    <div class="nav-links">
+      <a href="profile.html">Profile</a>
+      <a href="notifications.html">Notifications</a>
+      <a href="matches.html">Match Requests</a>
+      <a href="teams.html">My Team</a>
+      <a href="chat.html">Chat</a>
+    </div>
+  </nav>
 
   <div class="container">
-    <div class="profile-card">
+    <div class="profile-card" id="profile-card">
       <div class="profile-left">
-        <img src="https://i.pravatar.cc/150?img=5" alt="Profile Image" class="profile-pic" />
-        <h2>{{ user.full_name}}</h2>
-        <p class="age">{{ user.username }}</p>
+        <img src="" alt="Profile Image" class="profile-pic" />
+        <h2 id="profile-name"></h2>
+        <p class="age" id="profile-age"></p>
 
         <div class="button-group">
-          <button class="match-btn" onclick="matchUser()">Match ✅</button>
-          <button class="pass-btn" onclick="passUser()">Pass ❌</button>
+          <button class="match-btn" onclick="swipeProfile('right')">Match ✅</button>
+          <button class="pass-btn" onclick="swipeProfile('left')">Pass ❌</button>
         </div>
       </div>
 
-      <div class="profile-right">
-        <h3>Profile Information</h3>
-        <p><strong>Faculty:</strong> BCA</p>
-        <p><strong>Skills:</strong> Backend (Django), APIs, MongoDB</p>
-        <p><strong>Looking to team with:</strong> Frontend devs, UI/UX designers, Presenter</p>
-        <p><strong>Previous Projects:</strong> EcoWaste Tracker, StudyBuddy</p>
-        <p><strong>Contact:</strong> {{ user.email }}</p>
-        <div class="bio-box">
-          <strong>Bio:</strong> Passionate backend developer who loves working in collaborative teams and solving real-world problems. Available for exciting hackathons!
-        </div>
+      <div class="profile-right" id="profile-info">
+ 
       </div>
     </div>
   </div>
 
   <script>
-    function matchUser() {
-      window.location.href = "{% url 'matchPage' %}";
+    let profiles = [
+      {
+        name: "Josh Berette",
+        age: 21,
+        image: "https://i.pravatar.cc/150?img=5",
+        faculty: "BCA",
+        skills: "Backend (Django), APIs, MongoDB",
+        lookingFor: "Frontend devs, UI/UX designers, Presenter",
+        projects: "EcoWaste Tracker, StudyBuddy",
+        contact: "josh@example.com",
+        bio: "Passionate backend developer who loves working in collaborative teams and solving real-world problems."
+      },
+      {
+        name: "Sita Sharma",
+        age: 20,
+        image: "https://i.pravatar.cc/150?img=12",
+        faculty: "CSIT",
+        skills: "UI/UX, HTML, CSS",
+        lookingFor: "Backend Devs, Data Enthusiasts",
+        projects: "UI CloneX, Healthify",
+        contact: "sita@example.com",
+        bio: "Creative designer who loves clean and user-friendly interfaces. Loves collaborating in hackathons!"
+      },
+      {
+        name: "Rahul Karki",
+        age: 22,
+        image: "https://i.pravatar.cc/150?img=23",
+        faculty: "Engineering",
+        skills: "C++, Python, ML",
+        lookingFor: "Web Devs, Designers",
+        projects: "ML StockBot, QuizGen",
+        contact: "rahul@example.com",
+        bio: "Engineer turned problem solver. Always ready to learn and contribute!"
+      },
+      {
+        name: "Priya Joshi",
+        age: 19,
+        image: "https://i.pravatar.cc/150?img=47",
+        faculty: "BIM",
+        skills: "WordPress, SEO, Google Analytics",
+        lookingFor: "Content Writer, Frontend Dev",
+        projects: "BlogEase, CampusJournal",
+        contact: "priya@example.com",
+        bio: "Digital marketer and aspiring tech leader. Love community work!"
+      },
+      {
+        name: "Nirajan Bista",
+        age: 23,
+        image: "https://i.pravatar.cc/150?img=44",
+        faculty: "BSc.CSIT",
+        skills: "Full Stack (MERN), Firebase",
+        lookingFor: "UI/UX, Backend APIs",
+        projects: "TravelMate, FoodFinder",
+        contact: "nirajan@example.com",
+        bio: "I love solving real-world problems through scalable apps."
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function loadProfile(index) {
+      const profile = profiles[index];
+      document.querySelector(".profile-pic").src = profile.image;
+      document.getElementById("profile-name").textContent = profile.name;
+      document.getElementById("profile-age").textContent = `${profile.age} years old`;
+      document.getElementById("profile-info").innerHTML = `
+        <h3>Profile Information</h3>
+        <p><strong>Faculty:</strong> ${profile.faculty}</p>
+        <p><strong>Skills:</strong> ${profile.skills}</p>
+        <p><strong>Looking to team with:</strong> ${profile.lookingFor}</p>
+        <p><strong>Previous Projects:</strong> ${profile.projects}</p>
+        <p><strong>Contact:</strong> ${profile.contact}</p>
+        <div class="bio-box">
+          <strong>Bio:</strong> ${profile.bio}
+        </div>
+      `;
     }
 
-    function passUser() {
-      // Simulate moving to next suggestion (replace profile with another)
-      alert("Skipped. Load next profile here.");
-      // You can implement a list of profiles later using JS array.
+    function swipeProfile(direction) {
+      const card = document.getElementById("profile-card");
+      card.classList.add(direction === 'right' ? 'swipe-right' : 'swipe-left');
+
+      setTimeout(() => {
+        card.classList.remove('swipe-right', 'swipe-left');
+
+        currentIndex++;
+        if (currentIndex >= profiles.length) {
+          shuffleProfiles();
+          currentIndex = 0;
+        }
+
+        loadProfile(currentIndex);
+      }, 500); 
     }
+
+    function shuffleProfiles() {
+      profiles.sort(() => Math.random() - 0.5);
+    }
+
+    window.onload = () => {
+      shuffleProfiles();
+      loadProfile(currentIndex);
+    };
   </script>
 
 </body>

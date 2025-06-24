@@ -7,7 +7,12 @@ from project.models import Project
 # Create your views here.
 
 def viewProject(request):
-    return render(request,'project/viewProject.html')
+    if request.user.is_authenticated:
+        projects = Project.objects.all()
+    context={
+        'projects':projects
+    }
+    return render(request,'project/viewProject.html', context)
 
 def editProject(request):
     return render(request,'project/editProject.html')

@@ -93,7 +93,7 @@ def change_password(request):
         else:
             messages.error(request, 'Password does not match!')
             return redirect('change_password')
-    return render(request, 'accounts/change_password.html')
+    return render(request, 'accounts/change-password.html')
 
 
 def activate(request, uidb64, token):
