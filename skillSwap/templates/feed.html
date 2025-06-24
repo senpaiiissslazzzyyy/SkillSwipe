@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile – SkillSwipe</title>
+  <style>
+    /* General */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #e9d5ec, #ffd6e8, #f8d5e5);
+  color: #444;
+}
+
+/* Navbar */
+.navbar {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #e91e63;
+}
+
+.nav-links a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #e91e63;
+}
+
+/* Main Content */
+.container {
+  max-width: 1000px;
+  margin: 100px auto 40px;
+  padding: 20px;
+}
+
+/* Profile Card */
+.profile-card {
+  display: flex;
+  flex-wrap: wrap;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 32px;
+  gap: 40px;
+}
+
+/* Left */
+.profile-left {
+  flex: 1;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 4px solid #f06292;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.profile-left h2 {
+  margin: 16px 0 8px;
+  color: #d81b60;
+}
+
+.age {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Buttons */
+.button-group {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.match-btn, .pass-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.match-btn {
+  background-color: #e91e63;
+  color: white;
+}
+
+.match-btn:hover {
+  background-color: #d81b60;
+  transform: scale(1.05);
+}
+
+.pass-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.pass-btn:hover {
+  background-color: #bbb;
+  transform: scale(1.05);
+}
+
+/* Right */
+.profile-right {
+  flex: 2;
+  font-size: 15px;
+}
+
+.profile-right h3 {
+  color: #e91e63;
+  font-size: 20px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #f8bbd0;
+  padding-bottom: 8px;
+}
+
+.profile-right p {
+  margin: 8px 0;
+}
+
+.bio-box {
+  background: #fce4ec;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 16px;
+}
+  </style>
+</head>
+<body>
+{% include 'layouts/navbar.html' %}
+
+  <div class="container">
+    <div class="profile-card">
+      <div class="profile-left">
+        <img src="https://i.pravatar.cc/150?img=5" alt="Profile Image" class="profile-pic" />
+        <h2>Josh Berette</h2>
+        <p class="age">21 years old</p>
+
+        <div class="button-group">
+          <button class="match-btn" onclick="matchUser()">Match ✅</button>
+          <button class="pass-btn" onclick="passUser()">Pass ❌</button>
+        </div>
+      </div>
+
+      <div class="profile-right">
+        <h3>Profile Information</h3>
+        <p><strong>Faculty:</strong> BCA</p>
+        <p><strong>Skills:</strong> Backend (Django), APIs, MongoDB</p>
+        <p><strong>Looking to team with:</strong> Frontend devs, UI/UX designers, Presenter</p>
+        <p><strong>Previous Projects:</strong> EcoWaste Tracker, StudyBuddy</p>
+        <p><strong>Contact:</strong> josh@example.com</p>
+        <div class="bio-box">
+          <strong>Bio:</strong> Passionate backend developer who loves working in collaborative teams and solving real-world problems. Available for exciting hackathons!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function matchUser() {
+      window.location.href = "team-match.html";
+    }
+
+    function passUser() {
+      // Simulate moving to next suggestion (replace profile with another)
+      alert("Skipped. Load next profile here.");
+      // You can implement a list of profiles later using JS array.
+    }
+  </script>
+
+</body>
+</html>

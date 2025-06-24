@@ -175,14 +175,7 @@ def resetPassword(request):
     
 
 def viewProfile(request):
-    userprofile = get_object_or_404(UserProfile, user=request.user)
-    user_form = UserForm(instance=request.user)
-    profile_form = UserProfileForm(instance=userprofile)
-    context={
-        'user_form': user_form,
-        'profile_form': profile_form
-    }
-    return render (request, 'accounts/profilepage.html',context)
+    return render (request, 'accounts/profilepage.html')
 
 @login_required(login_url='login')
 def edit_profile(request):
@@ -204,6 +197,3 @@ def edit_profile(request):
         'userprofile': userprofile,
     }
     return render(request, 'accounts/profilepage.html',context)
-
-def feed(request):
-    return render(request,'accounts/feed.html')

@@ -6,8 +6,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-purple-200 to-pink-300 to-rose-300 min-h-screen flex items-center justify-center font-sans relative">
-{% include 'layouts/navBar.html' %}
+
+{% include 'layouts/navbar.html' %}
   <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-2xl">
+
     <div class="mb-6 text-center">
       <h1 class="text-3xl font-bold text-pink-700">My Projects</h1>
       <p class="text-gray-600">Create and manage your project teams here.</p>
@@ -15,9 +17,16 @@
 
     <div class="bg-purple-50 p-6 rounded-xl shadow-inner mb-10">
       <h2 class="text-xl font-semibold text-pink-500 mb-4"> Add Project </h2>
-      <form class="space-y-4" method="POST">
-        {% csrf_token %}
-      {{ form.as_p }}
+      <form class="space-y-4">
+        
+        <input type="text" placeholder="Project Name" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-purple-300" required>
+
+        <textarea placeholder="Short Description (optional)" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-purple-300"></textarea>
+
+        <input id="memberCount" type="number" min="1" max="10" placeholder="Total Members Needed" class="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-purple-300" required>
+
+        <div id="rolesContainer" class="space-y-3 pt-2"></div>
+
         <button type="submit" class="w-full bg-pink-400 hover:bg-purple-400 text-white font-semibold py-2 rounded-md transition">
           Add Project
         </button>
