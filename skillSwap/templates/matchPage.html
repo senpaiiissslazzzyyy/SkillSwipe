@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Team Formation – SkillSwipe</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-pink-300 to-purple-200 to-rose-200 min-h-screen font-sans">
+{% include 'layouts/navBar.html' %}
+  <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+    <div class="bg-white p-6 rounded-2xl shadow-md">
+      <h2 class="text-2xl font-bold text-pink-500 mb-4">📬 Match Requests</h2>
+      <div class="space-y-4" id="matchRequests">
+
+        <div class="flex items-center justify-between bg-purple-50 p-4 rounded-xl shadow" id="match-aarav">
+          <div>
+            <h3 class="text-lg font-semibold text-pink-600">{{ user.full_name }}</h3>
+            <p class="text-sm text-gray-600">Backend Developer | Looking for Frontend</p>
+          </div>
+          <div class="flex space-x-2">
+            <button onclick="acceptMatch('Aarav R.', 'Backend Developer', 'match-aarav')" class="bg-green-500 hover:bg-green-600 text-white text-sm px-4 py-1 rounded-md">Accept</button>
+            <button onclick="declineMatch('match-aarav')" class="bg-gray-300 hover:bg-gray-400 text-gray-800 text-sm px-4 py-1 rounded-md">Decline</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-md">
+      <h2 class="text-2xl font-bold text-pink-500 mb-4">👥 Your Team</h2>
+      <div class="space-y-4" id="teamList">
+
+        <div class="flex items-center justify-between bg-green-50 p-4 rounded-xl shadow">
+          <div>
+            <h3 class="text-lg font-semibold text-green-700">Neelam (You)</h3>
+            <p class="text-sm text-gray-600">Frontend Developer</p>
+          </div>
+          <span class="text-xs bg-green-500 text-white px-2 py-1 rounded-md">Confirmed</span>
+        </div>
+
+        <div id="memberCount" class="bg-gray-100 text-gray-500 text-sm p-4 rounded-xl text-center">
+          1/4 members found
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentMembers = 1;
+    const maxMembers = 4;
+
+    function acceptMatch(name, role, cardId) {
+      if (currentMembers >= maxMembers) {
+        alert("Team is full!");
+        return;
+      }
+
+      const teamCard = document.createElement('div');
+      teamCard.className = 'flex items-center justify-between bg-green-50 p-4 rounded-xl shadow';
+      teamCard.innerHTML = `
+        <div>
+          <h3 class="text-lg font-semibold text-green-700">${name}</h3>
+          <p class="text-sm text-gray-600">${role}</p>
+        </div>
+        <span class="text-xs bg-green-500 text-white px-2 py-1 rounded-md">Confirmed</span>
+      `;
+
+      const teamList = document.getElementById('teamList');
+      const counter = document.getElementById('memberCount');
+      teamList.insertBefore(teamCard, counter);
+
+      const matchCard = document.getElementById(cardId);
+      if (matchCard) matchCard.remove();
+
+      currentMembers++;
+      counter.innerText = `${currentMembers}/4 members found`;
+    }
+
+    function declineMatch(cardId) {
+      const matchCard = document.getElementById(cardId);
+      if (matchCard) matchCard.remove();
+    }
+  </script>
+
+</body>
+</html>

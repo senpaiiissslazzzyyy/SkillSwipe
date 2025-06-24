@@ -3,9 +3,12 @@ from django. shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
-def myprofile(request):
-    return render(request, 'profile.html')
-from django. shortcuts import render
+def matchPage(request):
+    return render(request, 'matchPage.html')
 
-def index(request):
-    return render(request, 'index.html')
+def feed(request):
+    user = request.user
+    context={
+        'user':user
+    }
+    return render(request, 'feed.html', context)
