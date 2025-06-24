@@ -23,5 +23,6 @@ urlpatterns = [
     path('',views.index, name='index'),
     path('myprofile', views.myprofile, name='myprofile' ),
     path('account/', include('accounts.urls')),
+    path('project/',include('project.urls')),
 ]
 
