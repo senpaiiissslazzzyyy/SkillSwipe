@@ -156,8 +156,8 @@ body {
     <div class="profile-card">
       <div class="profile-left">
         <img src="https://i.pravatar.cc/150?img=5" alt="Profile Image" class="profile-pic" />
-        <h2>Josh Berette</h2>
-        <p class="age">21 years old</p>
+        <h2>{{ user.full_name}}</h2>
+        <p class="age">{{ user.username }}</p>
 
         <div class="button-group">
           <button class="match-btn" onclick="matchUser()">Match ✅</button>
@@ -171,7 +171,7 @@ body {
         <p><strong>Skills:</strong> Backend (Django), APIs, MongoDB</p>
         <p><strong>Looking to team with:</strong> Frontend devs, UI/UX designers, Presenter</p>
         <p><strong>Previous Projects:</strong> EcoWaste Tracker, StudyBuddy</p>
-        <p><strong>Contact:</strong> josh@example.com</p>
+        <p><strong>Contact:</strong> {{ user.email }}</p>
         <div class="bio-box">
           <strong>Bio:</strong> Passionate backend developer who loves working in collaborative teams and solving real-world problems. Available for exciting hackathons!
         </div>
@@ -181,7 +181,7 @@ body {
 
   <script>
     function matchUser() {
-      window.location.href = "team-match.html";
+      window.location.href = "{% url 'matchPage' %}";
     }
 
     function passUser() {
