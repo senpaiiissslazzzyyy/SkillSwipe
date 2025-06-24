@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,14 +7,13 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gradient-to-br from-purple-200 to-pink-300 to-rose-300 min-h-screen flex items-center justify-center font-sans relative">
-
-  <div class="absolute top-6 left-6 text-xl font-bold text-pink-600 z-10">SkillSwipe</div>
+{% include 'layouts/navbar.html' %}
 
   <div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-2xl">
 
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-xl font-semibold text-rose-700">Your Projects</h2>
-      <a href="projectdashboard.html" class="bg-pink-400 hover:bg-neutral-400 text-white px-4 py-2 rounded-md text-sm font-medium transition">
+      <a href="{% url 'addProject' %}" class="bg-pink-400 hover:bg-neutral-400 text-white px-4 py-2 rounded-md text-sm font-medium transition">
         ➕ Add Project
       </a>
     </div>
